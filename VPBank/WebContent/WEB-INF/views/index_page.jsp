@@ -26,7 +26,7 @@
 				
 			</ul>
 			<ul class="logout">
-				<li><a href="#">logout</a></li>
+				<li><a href="logout">logout</a></li>
 			</ul>
 		</div>
 		<%

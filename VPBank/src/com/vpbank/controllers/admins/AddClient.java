@@ -58,6 +58,7 @@ public class AddClient extends HttpServlet {
 		cad.setUserPW("student");
 		
 		c.setClientAccessDetails(cad);
+		cad.setClient(c);
 		
 		System.out.println(c);
 		System.out.println(cad);
