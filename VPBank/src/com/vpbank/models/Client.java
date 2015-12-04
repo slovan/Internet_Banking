@@ -1,8 +1,11 @@
 package com.vpbank.models;
 
 import java.io.Serializable;
+import java.text.Collator;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.*;
 
@@ -10,6 +13,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Client
  *
  */
+@NamedQuery(name = "findClientsByName", query = "SELECT c FROM Client c WHERE c.lastName LIKE :lastName AND c.firstName LIKE :firstName")
 @Entity
 
 public class Client implements Serializable {
@@ -43,6 +47,50 @@ public class Client implements Serializable {
 
 	@OneToMany(mappedBy = "ownerOfAccount")
 	private List<Account> accounts;
+	
+	public static Comparator<Client> byFirstName = new Comparator<Client>() {
+		public int compare(Client c1, Client c2) {
+			Collator skCollator = Collator.getInstance(new Locale("sk_SK"));
+			skCollator.setStrength(Collator.SECONDARY);
+			String firstName1 = c1.getFirstName();
+			String firstName2 = c2.getFirstName();
+			return skCollator.compare(firstName1, firstName2);
+		}
+	};
+	
+	public static Comparator<Client> byLastName = new Comparator<Client>() {
+		public int compare(Client c1, Client c2) {
+			Collator skCollator = Collator.getInstance(new Locale("sk_SK"));
+			skCollator.setStrength(Collator.SECONDARY);
+			String lastName1 = c1.getLastName();
+			String lastName2 = c2.getLastName();			
+			return skCollator.compare(lastName1, lastName2);
+		}
+	};
+	
+	public static Comparator<Client> byDateOfBirth = new Comparator<Client>() {
+		public int compare(Client c1, Client c2) {
+			Date dob1 = c1.getDob();
+			Date dob2 = c2.getDob();
+			return dob1.compareTo(dob2);
+		}
+	};
+	
+	public static Comparator<Client> byGender = new Comparator<Client>() {
+		public int compare(Client c1, Client c2) {
+			Gender gender1 = c1.getGender();
+			Gender gender2 = c2.getGender();
+			return gender1.compareTo(gender2);
+		}
+	};
+	
+	public static Comparator<Client> byMaritalStatus = new Comparator<Client>() {
+		public int compare(Client c1, Client c2) {
+			MaritalStatus ms1 = c1.getMaritalStatus();
+			MaritalStatus ms2 = c2.getMaritalStatus();
+			return ms1.compareTo(ms2);
+		}
+	};
 
 	public Integer getId() {
 		return id;
