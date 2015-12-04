@@ -24,13 +24,17 @@ public class Account implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	private Long accountNumber;
+	private Long accountNumberBasic;
+	
+	private Integer accountNumberPrefix;
+	
+	private String bankCode;
 
 	private String accountNumberIBAN;
 
 	private String accountName;
 
-	private Integer amount;
+	private Double amount;
 
 	@Enumerated(EnumType.STRING)
 	private AccountType accountType;
@@ -53,13 +57,7 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public Long getAccountNumber() {
-		return accountNumber;
-	}
 
-	public void setAccountNumber(Long accountNumber) {
-		this.accountNumber = accountNumber;
-	}
 
 	public String getAccountNumberIBAN() {
 		return accountNumberIBAN;
@@ -77,11 +75,11 @@ public class Account implements Serializable {
 		this.accountName = accountName;
 	}
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
@@ -117,11 +115,30 @@ public class Account implements Serializable {
 		this.ownerOfAccount = ownerOfAccount;
 	}
 
-	@Override
-	public String toString() {
-		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", accountNumberIBAN=" + accountNumberIBAN
-				+ ", accountName=" + accountName + ", amount=" + amount + ", accountType=" + accountType + ", dateOpen="
-				+ dateOpen + ", dateClose=" + dateClose + ", ownerOfAccount=" + ownerOfAccount + "]";
+	public Long getAccountNumberBasic() {
+		return accountNumberBasic;
 	}
+
+	public void setAccountNumberBasic(Long accountNumberBasic) {
+		this.accountNumberBasic = accountNumberBasic;
+	}
+
+	public Integer getAccountNumberPrefix() {
+		return accountNumberPrefix;
+	}
+
+	public void setAccountNumberPrefix(Integer accountNumberPrefix) {
+		this.accountNumberPrefix = accountNumberPrefix;
+	}
+
+	public String getBankCode() {
+		return bankCode;
+	}
+
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+
+	
 
 }
