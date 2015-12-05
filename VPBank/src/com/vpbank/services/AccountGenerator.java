@@ -33,17 +33,14 @@ public class AccountGenerator {
 		// The remainder must be zero.
 
 		byte[] accountNumArray = new byte[10]; // because 10 digits of account
-		accountNumArray[0] = (byte) (accountNumberBasic / 1000000000); // get
-																		// 1st
-																		// digit
-																		// from
-																		// the
-																		// number
-		for (int i = 1; i < accountNumArray.length; i++) {
-			// get 2nd, 3rd, ...., 10th digits from the number
-			accountNumArray[i] = (byte) ((accountNumberBasic - accountNumArray[i - 1] * Math.pow(10, (10 - i)))
-					/ Math.pow(10, (10 - i - 1)));
+		// get string representation of account
+		String accountNumStr = String.valueOf(accountNumberBasic); 
+
+		// get digits from the number to array
+		for (int i = 0; i < accountNumArray.length; i++) {
+			accountNumArray[i] = Byte.parseByte(String.valueOf(accountNumStr.charAt(i)));
 		}
+
 		byte[] weights = { 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 };
 
 		// check remainder
@@ -57,9 +54,9 @@ public class AccountGenerator {
 		else {
 			// we have to get reminder = 0, use loop for this
 			do {
-				switch (remainder) {
-				// increase with 10, because of value of weight
+				switch (remainder) {			
 				case 1:
+					// increase with 10, because of value of weight
 					accountNumArray[4] = (byte) (++accountNumArray[4] % 10);
 					break;
 				case 2:
@@ -102,7 +99,7 @@ public class AccountGenerator {
 
 			// take correct accountNumberBasic from array of byte
 			accountNumberBasic = 0;
-			for (int i = 0; i < accountNumArray.length; i++) {
+			for (int i = accountNumArray.length - 1; i >= 0; i--) {
 				accountNumberBasic += accountNumArray[i] * Math.pow(10, (9 - i));
 			}
 			return accountNumberBasic;
@@ -110,7 +107,7 @@ public class AccountGenerator {
 	}
 
 	// generate individual account number (prefix)
-	public static int genAccountNumberPrefix(Client c, int start) {
+	public static int genAccountNumberPrefix(int start) {
 		// According to the National Bank of Slovakia, to validate the prefix
 		// part
 		// of the account number, the digits are multiplied by
@@ -119,15 +116,17 @@ public class AccountGenerator {
 		int accountNumberPrefix = start + 1;
 
 		byte[] accountNumArray = new byte[6]; // because 6 digits of account
-		accountNumArray[0] = (byte) (accountNumberPrefix / 100000); // get 1st
-																	// digit
-																	// from the
-																	// number
-		for (int i = 1; i < accountNumArray.length; i++) {
-			// get 2nd, 3rd, ...., 10th digits from the number
-			accountNumArray[i] = (byte) ((accountNumberPrefix - accountNumArray[i - 1] * Math.pow(10, (6 - i)))
-					/ Math.pow(10, (6 - i - 1)));
+		
+		// get string representation of account
+		String accountNumStr = String.valueOf(accountNumberPrefix); 
+		while (accountNumStr.length() < 6) {
+			accountNumStr = "0" + accountNumStr;
 		}
+		// get digits from the number to array
+		for (int i = 0; i < accountNumArray.length; i++) {
+			accountNumArray[i] = Byte.parseByte(String.valueOf(accountNumStr.charAt(i)));
+		}
+
 		byte[] weights = { 10, 5, 8, 4, 2, 1 };
 
 		// check remainder
@@ -202,7 +201,7 @@ public class AccountGenerator {
 
 			// take correct accountNumberPrefix from array of byte
 			accountNumberPrefix = 0;
-			for (int i = 0; i < accountNumArray.length; i++) {
+			for (int i = accountNumArray.length - 1; i >= 0; i--) {
 				accountNumberPrefix += accountNumArray[i] * Math.pow(10, (6 - i - 1));
 			}
 			return accountNumberPrefix;
