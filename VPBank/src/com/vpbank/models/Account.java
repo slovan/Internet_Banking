@@ -22,19 +22,23 @@ public class Account implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private int id;
 
-	private Long accountNumberBasic;
-	
-	private Integer accountNumberPrefix;
-	
-	private String bankCode;
+	private long accountNumberBasic;
+
+	private int accountNumberPrefix;
+
+	private short bankCode;
+
+	private String SWIFTcode;
 
 	private String accountNumberIBAN;
 
 	private String accountName;
 
-	private Double amount;
+	private double amount;
+
+	private String currency;
 
 	@Enumerated(EnumType.STRING)
 	private AccountType accountType;
@@ -49,15 +53,45 @@ public class Account implements Serializable {
 	@JoinColumn(name = "client_fk")
 	private Client ownerOfAccount;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
+	public long getAccountNumberBasic() {
+		return accountNumberBasic;
+	}
 
+	public void setAccountNumberBasic(long accountNumberBasic) {
+		this.accountNumberBasic = accountNumberBasic;
+	}
+
+	public int getAccountNumberPrefix() {
+		return accountNumberPrefix;
+	}
+
+	public void setAccountNumberPrefix(int accountNumberPrefix) {
+		this.accountNumberPrefix = accountNumberPrefix;
+	}
+
+	public short getBankCode() {
+		return bankCode;
+	}
+
+	public void setBankCode(short bankCode) {
+		this.bankCode = bankCode;
+	}
+
+	public String getSWIFTcode() {
+		return SWIFTcode;
+	}
+
+	public void setSWIFTcode(String sWIFTcode) {
+		SWIFTcode = sWIFTcode;
+	}
 
 	public String getAccountNumberIBAN() {
 		return accountNumberIBAN;
@@ -75,16 +109,24 @@ public class Account implements Serializable {
 		this.accountName = accountName;
 	}
 
-	public Double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
 	public AccountType getAccountType() {
 		return accountType;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public void setAccountType(AccountType accountType) {
@@ -115,30 +157,13 @@ public class Account implements Serializable {
 		this.ownerOfAccount = ownerOfAccount;
 	}
 
-	public Long getAccountNumberBasic() {
-		return accountNumberBasic;
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", accountNumberBasic=" + accountNumberBasic + ", accountNumberPrefix="
+				+ accountNumberPrefix + ", bankCode=" + bankCode + ", SWIFTcode=" + SWIFTcode + ", accountNumberIBAN="
+				+ accountNumberIBAN + ", accountName=" + accountName + ", amount=" + amount + ", currency=" + currency
+				+ ", accountType=" + accountType + ", dateOpen=" + dateOpen + ", dateClose=" + dateClose
+				+ ", ownerOfAccount=" + ownerOfAccount + "]";
 	}
-
-	public void setAccountNumberBasic(Long accountNumberBasic) {
-		this.accountNumberBasic = accountNumberBasic;
-	}
-
-	public Integer getAccountNumberPrefix() {
-		return accountNumberPrefix;
-	}
-
-	public void setAccountNumberPrefix(Integer accountNumberPrefix) {
-		this.accountNumberPrefix = accountNumberPrefix;
-	}
-
-	public String getBankCode() {
-		return bankCode;
-	}
-
-	public void setBankCode(String bankCode) {
-		this.bankCode = bankCode;
-	}
-
-	
 
 }
