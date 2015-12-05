@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.vpbank.models.Client;
 import com.vpbank.services.ClientService;
@@ -23,6 +24,7 @@ public class AddAccountToClient extends HttpServlet {
     
 	@EJB
 	ClientService cs;
+	
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,17 +50,30 @@ public class AddAccountToClient extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String clientFirstName = request.getParameter("first_name");
-		String clientLastName = request.getParameter("last_name");
+		List<Client> selectedClients;
+		HttpSession session = request.getSession();
 		RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/add_account.jsp");
-		if ((clientFirstName.equals(""))&&(clientLastName.equals(""))) {
+		
+		if (request.getParameter("client_order_in_list") == null) {
+			String clientFirstName = request.getParameter("first_name");
+			String clientLastName = request.getParameter("last_name");
 			
-			request.setAttribute("empty_error", true);
+			if ((clientFirstName.equals(""))&&(clientLastName.equals(""))) {
+				
+				request.setAttribute("empty_error", true);
+				view.forward(request, response);
+			}
+			
+			selectedClients = cs.getClients(clientFirstName, clientLastName);
+			session.setAttribute("selected_clients", selectedClients);
+			view.forward(request, response);
+		} else {
+			Integer orderInList = Integer.parseInt(request.getParameter("client_order_in_list"));
+			selectedClients = (List<Client>)session.getAttribute("selected_clients");
+			Client client = selectedClients.get(orderInList);
+			session.setAttribute("client", client);
 			view.forward(request, response);
 		}
-		List<Client> selectedClients = cs.getClients(clientFirstName, clientLastName);
-		request.setAttribute("selected_clients", selectedClients);
-		view.forward(request, response);
 	}
 
 }

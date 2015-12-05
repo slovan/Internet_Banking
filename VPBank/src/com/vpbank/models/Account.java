@@ -9,6 +9,7 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Account
  *
  */
+@NamedQuery(name = "findAccountsByBasicNumber", query = "SELECT acc FROM Account acc WHERE acc.accountNumberBasic = :accountNumberBasic")
 @Entity
 
 public class Account implements Serializable {

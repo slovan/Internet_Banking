@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"
+	import="java.util.Date, java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +16,16 @@
 <body>
 	<h1 style="text-decoration: underline;">VPBank administration console</h1>
 	<h1>Add a new client</h1>
+	
 	<form method="POST" action="new_client">
-		Login:
-		<input name="user_ID" type="text"></input>
+		Login: <!-- Allow digits, simple letters (without diakritics) Min 6 max 20  -->
+		<input name="user_ID" type="text" pattern="[A-Za-z0-9]{6,20}"></input> 
 		<br /><br />
-		Password:
-		<input name="user_PWD" type="text"></input>
+		Password: <!-- Allow digits, simple letters (without diakritics), symbols ".-_" Min 8  -->
+		<input name="user_PWD" type="text" pattern="[A-Za-z0-9\Q._-\E]{8,}">
+		 gfgfgnf
 		<br /><br />
-		First name:
+		First name: <!-- Allow digits, simple letters (without diakritics), symbols ".-_" Min 8  -->
 		<input name="first_name" type="text"></input>
 		<br /><br />
 		Last name:
@@ -30,12 +35,16 @@
 		<input name="pass_num" type="text"></input>
 		<br /><br />
 		Date of birth:
-		<input name="dob" type="text"></input>
+		<% 
+			Date now = new Date(); // current date 
+			SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
+		%>
+		<input type="date" name="dob" value="<%= dateFormated.format(now) %>" max="<%= dateFormated.format(now) %>"></input>
 		<br /><br />
 		Gender:
 		<select name="gender">
-			<option value="FEMALE">Female</option>
 			<option value="MALE">Male</option>
+			<option value="FEMALE">Female</option>
 		</select>
 		<br /><br />
 		Marital status:
@@ -50,7 +59,8 @@
 			<option value="UNMARRIED_PARTNERS">Unmarried partners</option>
 		</select>
 		<hr />
-		<button type="submit">Add client</button>
+		<button name="find_stream" type="submit" value="confirm_only">Confirm</button>
+		<button name="find_stream" type="submit" value="confirm_and_continue">Confirm and add an account</button>
 		<hr />
 	</form>
 </body>
