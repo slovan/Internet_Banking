@@ -1,25 +1,24 @@
 body { 
-	font-family: Arial, sans-serif; 
+	font-family: Montserrat; 
 	line-height: 1.4;
 	font-size: 13px;
-	background: #fff url(../images/bg.jpg) repeat-x;
+	background: url('../images/bg-light.jpg') repeat rgb(219, 219, 219);
 	margin: 0;
 	padding: 0;
-	color: #112211;
 }
 
 a { color: #3F4C6B; text-decoration: none;}
 a:hover { text-decoration: underline; }
 
 #wrap { 
-	width: 800px;
+	width: 1024px;
 	margin: 20px auto;
 }
 
 #header {
-background: url(../images/header.png) no-repeat;
-height: 160px;
-border-radius: 5px;
+	background: url('../images/header.png') no-repeat;
+	width: 1024px;
+	height: 160px;
 }
 
 #header img{

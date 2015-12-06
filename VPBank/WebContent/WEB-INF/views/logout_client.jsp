@@ -20,7 +20,7 @@
 		</p>
 		<br />
 		<p style="text-align: center;"><img src="resources/images/smile.png" width="100px" height="100px" alt="smile" /></p>
-		<form action="login" method="get">
+		<form action="logout" method="post">
 			<input type="submit" value="Restore session" id="submitBtn" />
 		</form>
 	</div>
