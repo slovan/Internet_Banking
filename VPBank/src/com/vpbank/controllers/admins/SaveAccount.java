@@ -139,9 +139,10 @@ public class SaveAccount extends HttpServlet {
 		// get owner of the account from this session
 		HttpSession session = request.getSession();
 		Client client = (Client) session.getAttribute("client");
+		int clientId = client.getId(); // take id of client for using in searching in DB
 		
 		// add account to client's list of accounts
-		as.addAccountToClient(account, client);
+		as.addAccountToClient(account, clientId);
 	}
 
 }

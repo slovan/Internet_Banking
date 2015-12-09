@@ -77,7 +77,7 @@ public class LogInClient extends HttpServlet {
 		}
 		if (flag) {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(60);
+			session.setMaxInactiveInterval(1000);
 			session.setAttribute("checking", cad);
 			response.sendRedirect("index");
 		} else {

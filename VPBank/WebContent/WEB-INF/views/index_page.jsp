@@ -23,7 +23,7 @@
 		<div class="menu">
 			<ul>
 				<li><a href="#">Home</a></li>
-				<li><a href="#">Accounts</a></li>
+				<li><a href="accounts">Accounts</a></li>
 				<li><a href="#">Payments</a></li>
 
 			</ul>

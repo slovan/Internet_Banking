@@ -33,8 +33,12 @@ public class AccountGenerator {
 		// The remainder must be zero.
 
 		byte[] accountNumArray = new byte[10]; // because 10 digits of account
+		
 		// get string representation of account
 		String accountNumStr = String.valueOf(accountNumberBasic); 
+		while (accountNumStr.length() < 10) {
+			accountNumStr = "0" + accountNumStr;
+		}
 
 		// get digits from the number to array
 		for (int i = 0; i < accountNumArray.length; i++) {

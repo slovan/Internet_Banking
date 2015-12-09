@@ -19,27 +19,26 @@
 	
 	<form method="POST" action="new_client">
 		Login: <!-- Allow digits, simple letters (without diakritics) Min 6 max 20  -->
-		<input name="user_ID" type="text" pattern="[A-Za-z0-9]{6,20}"></input> 
+		<input name="user_ID" type="text" pattern="[A-Za-z0-9]{6,20}" required></input> 
 		<br /><br />
 		Password: <!-- Allow digits, simple letters (without diakritics), symbols ".-_" Min 8  -->
-		<input name="user_PWD" type="text" pattern="[A-Za-z0-9\Q._-\E]{8,}">
-		 gfgfgnf
+		<input name="user_PWD" type="text" pattern="[A-Za-z0-9\.\_\-]{8,}" required></input> 
 		<br /><br />
 		First name: <!-- Allow digits, simple letters (without diakritics), symbols ".-_" Min 8  -->
-		<input name="first_name" type="text"></input>
+		<input name="first_name" type="text" required></input>
 		<br /><br />
 		Last name:
-		<input name="last_name" type="text"></input>
+		<input name="last_name" type="text" required></input>
 		<br /><br />
 		Identity card (passport) number:
-		<input name="pass_num" type="text"></input>
+		<input name="pass_num" type="text" required></input>
 		<br /><br />
 		Date of birth:
 		<% 
 			Date now = new Date(); // current date 
 			SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
 		%>
-		<input type="date" name="dob" value="<%= dateFormated.format(now) %>" max="<%= dateFormated.format(now) %>"></input>
+		<input type="date" name="dob" max="<%= dateFormated.format(now) %>" required></input>
 		<br /><br />
 		Gender:
 		<select name="gender">

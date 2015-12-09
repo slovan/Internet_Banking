@@ -28,8 +28,13 @@ public class AccountService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void addAccountToClient(Account account, Client client) {
+	public void addAccountToClient(Account account, int clientId) {
 		em.persist(account);
+		
+		// create a query to find a client by his id
+		TypedQuery<Client> clientQuery = em.createQuery("SELECT client FROM Client client WHERE client.id = :id", Client.class);
+		clientQuery.setParameter("id", clientId);
+		Client client = clientQuery.getSingleResult();
 		
 		// set owner of the account
 		account.setOwnerOfAccount(client);
@@ -38,6 +43,7 @@ public class AccountService {
 		List<Account> clientAccounts = client.getAccounts();
 		clientAccounts.add(account);
 		client.setAccounts(clientAccounts);
+
 	}
 
 	public List<Account> getAccountsWithSimilarBasicNumber(long accountNumberBasic) {
