@@ -1,68 +1,75 @@
 package com.vpbank.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 /**
  * Entity implementation class for Entity: ClientAccessDetails
  *
  */
 @Entity
-
+@NamedQuery(name = "ClientAccessDetails.findByLoginUsername", query = "SELECT cad FROM ClientAccessDetails cad WHERE cad.loginUsername LIKE :loginUsername")
 public class ClientAccessDetails implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ClientAccessDetails() {
-		super();
-	}
+    public ClientAccessDetails() {
+        super();
+    }
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	private String userID; // login
-	private String userPW; // password
-	
-	@OneToOne
-	@JoinColumn(name = "client_fk")
-	private Client client;
+    private String loginUsername; // login
+    private String loginPassword; // password
 
-	public Integer getId() {
-		return id;
-	}
+    @OneToOne
+    @JoinColumn(name = "client_fk")
+    private Client client;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public String getUserID() {
-		return userID;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+    public String getLoginUsername() {
+        return this.loginUsername;
+    }
 
-	public String getUserPW() {
-		return userPW;
-	}
+    public void setLoginUsername(String loginUsername) {
+        this.loginUsername = loginUsername;
+    }
 
-	public void setUserPW(String userPW) {
-		this.userPW = userPW;
-	}
+    public String getLoginPassword() {
+        return this.loginPassword;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public Client getClient() {
+        return this.client;
+    }
 
-	@Override
-	public String toString() {
-		return "ClientAccessDetails [id=" + id + ", userID=" + userID + ", userPW=" + userPW + "]";
-	}
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
+    @Override
+    public String toString() {
+        return "ClientAccessDetails [id=" + this.id + ", loginUsername=" + this.loginUsername + ", loginPassword=" + this.loginPassword
+                + ", client=" + this.client + "]";
+    }
 }

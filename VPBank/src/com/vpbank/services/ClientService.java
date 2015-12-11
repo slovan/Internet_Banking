@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -17,34 +18,58 @@ import com.vpbank.models.ClientAccessDetails;
 @Stateless
 @LocalBean
 public class ClientService {
-	
-	@PersistenceContext(unitName = "VPBank")
-	private EntityManager em;
+
+    @PersistenceContext(unitName = "VPBank")
+    private EntityManager em;
 
     /**
-     * Default constructor. 
+     * Default constructor.
      */
     public ClientService() {
         // TODO Auto-generated constructor stub
     }
-    
+
     public void addClient(Client c, ClientAccessDetails cad) {
-    	em.persist(cad);
-    	em.persist(c);
-    }
-    
-    public List<Client> getClients(String firstName, String lastName) {
-    	TypedQuery<Client> clientsQuery = em.createNamedQuery("findClientsByName", Client.class);
-    	clientsQuery.setParameter("lastName", lastName);
-    	clientsQuery.setParameter("firstName", firstName);
-    	List<Client> clientsList = clientsQuery.getResultList();
-    	return clientsList;
-    }
-    
-    public List<ClientAccessDetails> getClientAccessDetails(){
-    	TypedQuery<ClientAccessDetails> query = em.createQuery("SELECT cad FROM ClientAccessDetails cad", ClientAccessDetails.class);
-    	List<ClientAccessDetails> results = query.getResultList();
-    	return results;
+        this.em.persist(cad);
+        this.em.persist(c);
     }
 
+    public List<Client> getClientsByName(String firstName, String lastName) {
+        TypedQuery<Client> clientsQuery = this.em.createNamedQuery("Client.findByFullName", Client.class);
+        clientsQuery.setParameter("lastName", lastName);
+        clientsQuery.setParameter("firstName", firstName);
+        List<Client> clientsList = clientsQuery.getResultList();
+        return clientsList;
+    }
+
+    public List<ClientAccessDetails> getClientAccessDetails() {
+        TypedQuery<ClientAccessDetails> query = this.em.createQuery("SELECT cad FROM ClientAccessDetails cad",
+                ClientAccessDetails.class);
+        List<ClientAccessDetails> results = query.getResultList();
+        return results;
+    }
+    
+    // checks if such loginUsername is already exists in database
+    public boolean isLoginUsernameOccupied(String loginUsername) {
+        TypedQuery<ClientAccessDetails> cadQuery = this.em.createNamedQuery("ClientAccessDetails.findByLoginUsername", ClientAccessDetails.class);
+        cadQuery.setParameter("loginUsername", loginUsername);
+        try {
+            cadQuery.getSingleResult(); // get cad from DB if exists
+            return true;
+        } catch (NoResultException exc) {
+            return false;
+        }
+    }
+    
+    // checks if the client with a such passNum is already exists in database
+    public boolean isPassNumOccupied(String passNum) {
+        TypedQuery<Client> cQuery = this.em.createNamedQuery("Client.findByPassNumber", Client.class);
+        cQuery.setParameter("passNum", passNum);
+        try {
+            cQuery.getSingleResult(); // get client from DB if exists
+            return true;
+        } catch (NoResultException exc) {
+            return false;
+        }
+    }
 }

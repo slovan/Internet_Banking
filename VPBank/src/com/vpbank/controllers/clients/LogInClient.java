@@ -20,70 +20,70 @@ import com.vpbank.services.ClientService;
  */
 @WebServlet(description = "Servlet for ensuring clients' login to InternetBanking", urlPatterns = { "/login" })
 public class LogInClient extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@EJB
-	ClientService cs;
+    @EJB
+    private ClientService cs;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LogInClient() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LogInClient() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
-		request.setAttribute("username_error", false);
-		request.setAttribute("password_error", false);
-		request.setAttribute("user-ID", "");		
-		view.forward(request, response);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
+        request.setAttribute("username_error", false);
+        request.setAttribute("password_error", false);
+        request.setAttribute("user-ID", "");
+        view.forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		boolean flag = false;
-		String userID = request.getParameter("user_ID");
-		request.setAttribute("user-ID", userID);
-		String userPassword = request.getParameter("user_password");
-		request.setAttribute("username_error", true);
-		request.setAttribute("password_error", false);
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        boolean flag = false;
+        String userID = request.getParameter("user_ID");
+        request.setAttribute("user-ID", userID);
+        String userPassword = request.getParameter("user_password");
+        request.setAttribute("username_error", true);
+        request.setAttribute("password_error", false);
 
-		List<ClientAccessDetails> cadList = (List<ClientAccessDetails>) cs.getClientAccessDetails();
-		ClientAccessDetails cad = null;
-		for (int i = 0; i < cadList.size(); i++) {
-			if (cadList.get(i).getUserID().equals(userID)) {
-				System.out.println("user_ID: " + userID);
-				request.setAttribute("username_error", false);
-				if (cadList.get(i).getUserPW().equals(userPassword)) {
-					System.out.println("user_password: " + userPassword);
-					flag = true;
-					cad = cadList.get(i);							
-				} else {
-					request.setAttribute("password_error", true);
-				}
-				break;
-			}
-		}
-		if (flag) {
-			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(1000);
-			session.setAttribute("checking", cad);
-			response.sendRedirect("index");
-		} else {
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
-			view.forward(request, response);
-		}
-	}
+        List<ClientAccessDetails> cadList = (List<ClientAccessDetails>)this.cs.getClientAccessDetails();
+        ClientAccessDetails cad = null;
+        for (int i = 0; i < cadList.size(); i++) {
+            if (cadList.get(i).getLoginUsername().equals(userID)) {
+                System.out.println("user_ID: " + userID);
+                request.setAttribute("username_error", false);
+                if (cadList.get(i).getLoginPassword().equals(userPassword)) {
+                    System.out.println("user_password: " + userPassword);
+                    flag = true;
+                    cad = cadList.get(i);
+                } else {
+                    request.setAttribute("password_error", true);
+                }
+                break;
+            }
+        }
+        if (flag) {
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(1000);
+            session.setAttribute("checking", cad);
+            response.sendRedirect("index");
+        } else {
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
+            view.forward(request, response);
+        }
+    }
 
 }
