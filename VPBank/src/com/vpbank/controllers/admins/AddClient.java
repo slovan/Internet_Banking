@@ -99,6 +99,7 @@ public class AddClient extends HttpServlet {
         // get client's data from jsp
         // first name
         String firstName = request.getParameter("first_name");
+        System.out.println(firstName);
 
         // last name
         String lastName = request.getParameter("last_name");

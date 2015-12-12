@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
 	import="java.util.Date, java.text.SimpleDateFormat, com.vpbank.models.Gender, com.vpbank.models.MaritalStatus"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,7 @@
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'
 	rel='stylesheet' type='text/css'>
 <title>VPBank | Administration console | Adding a new client</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<div id="wrap">
@@ -75,7 +76,7 @@
 						  pattern="[[A-Za-z0-9]{6,20}" required></input>
 						<small> *min 6 characters: only English letters or digits</small>
 						<%
-                            if ((Boolean) request.getAttribute("client_exists")) {
+                            if ((Boolean)request.getAttribute("client_exists")) {
                         %>
                             <br><strong>Client with such passport number is already exists.</strong>
                         <%

@@ -31,7 +31,8 @@ import javax.persistence.Transient;
     @NamedQuery(name = "Client.findByFullName", query = "SELECT c FROM Client c WHERE c.lastName LIKE :lastName AND c.firstName LIKE :firstName"),
     @NamedQuery(name = "Client.findByFirstName", query = "SELECT c FROM Client c WHERE c.firstName LIKE :firstName"),
     @NamedQuery(name = "Client.findByLastName", query = "SELECT c FROM Client c WHERE c.lastName LIKE :lastName"),
-    @NamedQuery(name = "Client.findByPassNumber", query = "SELECT c FROM Client c WHERE c.passNum LIKE :passNum")
+    @NamedQuery(name = "Client.findByPassNumber", query = "SELECT c FROM Client c WHERE c.passNum LIKE :passNum"),
+    @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id")
     })
 public class Client implements Serializable {
 
@@ -44,7 +45,7 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -109,11 +110,11 @@ public class Client implements Serializable {
         }
     };
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

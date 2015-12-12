@@ -50,7 +50,8 @@ public class Account implements Serializable {
 
     private double amount;
 
-    private String currency;
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
@@ -133,11 +134,11 @@ public class Account implements Serializable {
         return this.accountType;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return this.currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 

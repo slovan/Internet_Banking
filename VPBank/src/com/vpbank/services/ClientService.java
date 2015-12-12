@@ -35,11 +35,31 @@ public class ClientService {
     }
 
     public List<Client> getClientsByName(String firstName, String lastName) {
+        // try to find clients by both name and surname
         TypedQuery<Client> clientsQuery = this.em.createNamedQuery("Client.findByFullName", Client.class);
         clientsQuery.setParameter("lastName", lastName);
         clientsQuery.setParameter("firstName", firstName);
         List<Client> clientsList = clientsQuery.getResultList();
+        if (clientsList.isEmpty()) { // no one such client
+            // try to find only by surname
+            clientsQuery = this.em.createNamedQuery("Client.findByLastName", Client.class);
+            clientsQuery.setParameter("lastName", lastName);
+            clientsList = clientsQuery.getResultList();
+        }
         return clientsList;
+    }
+    
+    // find client by his id in database
+    public Client getClientById(int id) {
+        TypedQuery<Client> cQuery = this.em.createNamedQuery("Client.findById", Client.class);
+        cQuery.setParameter("id", id);
+        Client client;
+        try {
+            client = cQuery.getSingleResult();
+        } catch (NoResultException exc) {
+            client = null;
+        } 
+        return client;
     }
 
     public List<ClientAccessDetails> getClientAccessDetails() {

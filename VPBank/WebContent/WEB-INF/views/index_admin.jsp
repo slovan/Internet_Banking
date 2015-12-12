@@ -36,7 +36,7 @@
 					<li><a href="admin/new_client">Add a new client</a></li>
 					<li><a href="#">Edit client's data</a></li>
 					<li><a href="#">Remove a client from database</a></li>
-					<li><a href="#">Add a new account to a client</a></li>
+					<li><a href="admin/add_account">Add a new account to a client</a></li>
 					<li><a href="#">Edit an account</a></li>
 					<li><a href="#">Remove an account</a></li>
 				</ol>
