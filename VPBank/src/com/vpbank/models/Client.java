@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -60,10 +61,10 @@ public class Client implements Serializable {
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
-    @OneToOne(mappedBy = "client")
+    @OneToOne(mappedBy = "client", cascade = CascadeType.REMOVE)
     private ClientAccessDetails clientAccessDetails;
 
-    @OneToMany(mappedBy = "ownerOfAccount")
+    @OneToMany(mappedBy = "ownerOfAccount", cascade = CascadeType.REMOVE)
     private List<Account> accounts;
 
     private static Comparator<Client> byFirstName = new Comparator<Client>() {
@@ -90,7 +91,7 @@ public class Client implements Serializable {
         public int compare(Client c1, Client c2) {
             Date dob1 = c1.getDob();
             Date dob2 = c2.getDob();
-            return dob1.compareTo(dob2);
+            return dob2.compareTo(dob1);
         }
     };
 

@@ -33,6 +33,27 @@ public class ClientService {
         this.em.persist(cad);
         this.em.persist(c);
     }
+    
+    // remove client from database
+    public boolean removeClient(int clientId) {
+        TypedQuery<Client> cQuery = this.em.createNamedQuery("Client.findById", Client.class);
+        cQuery.setParameter("id", clientId);
+        try {
+            Client client = cQuery.getSingleResult();
+            this.em.remove(client); // client access details and accounts will be deleted automatically
+            return true; // if removed
+        } catch (NoResultException exc) {
+            return false; // if cannot remove
+        } 
+
+    }
+    
+    // get all clients from database
+    public List<Client> getAllClients() {
+        TypedQuery<Client> clientsQuery = this.em.createQuery("SELECT client FROM Client client", Client.class);
+        List<Client> clientsList = clientsQuery.getResultList();
+        return clientsList;
+    }
 
     public List<Client> getClientsByName(String firstName, String lastName) {
         // try to find clients by both name and surname
@@ -49,7 +70,7 @@ public class ClientService {
         return clientsList;
     }
     
-    // find client by his id in database
+    // find client by his ID in database
     public Client getClientById(int id) {
         TypedQuery<Client> cQuery = this.em.createNamedQuery("Client.findById", Client.class);
         cQuery.setParameter("id", id);

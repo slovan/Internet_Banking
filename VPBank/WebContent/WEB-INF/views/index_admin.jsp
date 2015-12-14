@@ -21,9 +21,9 @@
 
 		<div class="menu">
 			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Clients</a></li>
-				<li><a href="#">Accounts</a></li>
+				<li><a href="admin">Home</a></li>
+				<li><a href="admin/table_clients">Clients</a></li>
+				<li><a href="admin/table_accounts">Accounts</a></li>
 			</ul>
 		</div>
 		<div id="contentwrap">
@@ -35,7 +35,7 @@
 				<ol class="bullet">
 					<li><a href="admin/new_client">Add a new client</a></li>
 					<li><a href="#">Edit client's data</a></li>
-					<li><a href="#">Remove a client from database</a></li>
+					<li><a href="admin/remove_client">Remove a client from database</a></li>
 					<li><a href="admin/add_account">Add a new account to a client</a></li>
 					<li><a href="#">Edit an account</a></li>
 					<li><a href="#">Remove an account</a></li>

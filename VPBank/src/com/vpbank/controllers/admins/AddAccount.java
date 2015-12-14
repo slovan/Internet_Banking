@@ -92,7 +92,7 @@ public class AddAccount extends HttpServlet {
                 clientLastName = "";
             }
             
-            // find in database possible clients, one of which will be owner o account
+            // find in database possible clients, one of which will be owner of account
             List<Client> selectedClients = this.cs.getClientsByName(clientFirstName, clientLastName);
             request.setAttribute("selected_clients", selectedClients);
             request.setAttribute("firstName", clientFirstName);
@@ -229,7 +229,14 @@ public class AddAccount extends HttpServlet {
                     dateClose = calDateClose.getTime();
                     // now check time validity of the account
                     Calendar today = Calendar.getInstance(); // current date
-                    if ((calDateOpen.compareTo(calDateClose) >= 0) || (today.compareTo(calDateClose) >= 0)) {
+                    today.set(Calendar.HOUR_OF_DAY, 23);
+                    today.set(Calendar.MINUTE, 59);
+                    today.set(Calendar.SECOND, 59);
+                    Calendar tomorrow = Calendar.getInstance();
+                    tomorrow.set(Calendar.DAY_OF_MONTH, today.get(Calendar.DAY_OF_MONTH) + 1);
+                    tomorrow.set(Calendar.HOUR_OF_DAY, 0);
+                    tomorrow.set(Calendar.MINUTE, 0);
+                    if ((calDateOpen.compareTo(today) >= 0) || (tomorrow.compareTo(calDateClose) >= 0)) {
                         request.setAttribute("error", true);
                         request.setAttribute("invalid", true);
                     } else {
@@ -259,7 +266,14 @@ public class AddAccount extends HttpServlet {
                         dateClose = calDateClose.getTime();
                         // now check time validity of the account
                         Calendar today = Calendar.getInstance(); // current date
-                        if ((calDateOpen.compareTo(calDateClose) >= 0) || (today.compareTo(calDateClose) >= 0)) {
+                        today.set(Calendar.HOUR_OF_DAY, 23);
+                        today.set(Calendar.MINUTE, 59);
+                        today.set(Calendar.SECOND, 59);
+                        Calendar tomorrow = Calendar.getInstance();
+                        tomorrow.set(Calendar.DAY_OF_MONTH, today.get(Calendar.DAY_OF_MONTH) + 1);
+                        tomorrow.set(Calendar.HOUR_OF_DAY, 0);
+                        tomorrow.set(Calendar.MINUTE, 0);
+                        if ((calDateOpen.compareTo(today) >= 0) || (tomorrow.compareTo(calDateClose) >= 0)) {
                             request.setAttribute("error", true);
                             request.setAttribute("invalid", true);
                         } else {

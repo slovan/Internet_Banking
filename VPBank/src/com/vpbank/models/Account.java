@@ -1,7 +1,10 @@
 package com.vpbank.models;
 
 import java.io.Serializable;
+import java.text.Collator;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -65,6 +68,56 @@ public class Account implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_fk")
     private Client ownerOfAccount;
+    
+    private static Comparator<Account> byDateOfClose = new Comparator<Account>() {
+        public int compare(Account acc1, Account acc2) {
+            Date dateClose1 = acc1.getDateClose();
+            Date dateClose2 = acc2.getDateClose();
+            return dateClose1.compareTo(dateClose2);
+        }
+    };
+    
+    private static Comparator<Account> byAccountType = new Comparator<Account>() {
+        public int compare(Account acc1, Account acc2) {
+            AccountType accountType1 = acc1.getAccountType();
+            AccountType accountType2 = acc2.getAccountType();
+            return accountType1.compareTo(accountType2);
+        }
+    };
+    
+    private static Comparator<Account> byBalance = new Comparator<Account>() {
+        public int compare(Account acc1, Account acc2) {
+            Double balance1 = acc1.getAmount();
+            Double balance2 = acc2.getAmount();
+            return balance1.compareTo(balance2);
+        }
+    };
+    
+    private static Comparator<Account> byOwnerLastName = new Comparator<Account>() {
+        public int compare(Account acc1, Account acc2) {
+            Client c1 = acc1.getOwnerOfAccount();
+            Client c2 = acc2.getOwnerOfAccount();
+            Collator skCollator = Collator.getInstance(new Locale("sk_SK"));
+            skCollator.setStrength(Collator.SECONDARY);
+            String lastName1 = c1.getLastName();
+            String lastName2 = c2.getLastName();
+            return skCollator.compare(lastName1, lastName2);
+        }
+    };
+    
+    private static Comparator<Account> byOwnerFirstName = new Comparator<Account>() {
+        public int compare(Account acc1, Account acc2) {
+            Client c1 = acc1.getOwnerOfAccount();
+            Client c2 = acc2.getOwnerOfAccount();
+            Collator skCollator = Collator.getInstance(new Locale("sk_SK"));
+            skCollator.setStrength(Collator.SECONDARY);
+            String firstName1 = c1.getFirstName();
+            String firstName2 = c2.getFirstName();
+            return skCollator.compare(firstName1, firstName2);
+        }
+    };
+    
+    private static Comparator<Account> byOwnerName = Account.byOwnerLastName.thenComparing(Account.byOwnerFirstName);
 
     public int getId() {
         return this.id;
@@ -168,6 +221,38 @@ public class Account implements Serializable {
 
     public void setOwnerOfAccount(Client ownerOfAccount) {
         this.ownerOfAccount = ownerOfAccount;
+    }
+
+    public static Comparator<Account> getByDateOfClose() {
+        return byDateOfClose;
+    }
+
+    public static void setByDateOfClose(Comparator<Account> byDateOfClose) {
+        Account.byDateOfClose = byDateOfClose;
+    }
+
+    public static Comparator<Account> getByAccountType() {
+        return byAccountType;
+    }
+
+    public static void setByAccountType(Comparator<Account> byAccountType) {
+        Account.byAccountType = byAccountType;
+    }
+
+    public static Comparator<Account> getByBalance() {
+        return byBalance;
+    }
+
+    public static void setByBalance(Comparator<Account> byBalance) {
+        Account.byBalance = byBalance;
+    }
+
+    public static Comparator<Account> getByOwnerName() {
+        return byOwnerName;
+    }
+
+    public static void setByOwnerName(Comparator<Account> byOwnerName) {
+        Account.byOwnerName = byOwnerName;
     }
 
     @Override

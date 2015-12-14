@@ -112,29 +112,30 @@ a:hover {
 }
 
 #content table {
-	font-size: 14px;
-	background: white;
-	width: 100%;
-	border-collapse: collapse;
-	text-align: center;
+    font-size: 14px;
+    background: white;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 #content th {
-	font-size: 13px;
-	font-weight: normal;
-	background: #8e97bc;
-	border-top: 4px solid #000;
-	border-bottom: 1px solid #fff;
-	color: #fff;
-	padding: 8px;
+    font-size: 13px;
+    font-weight: normal;
+    background: #8e97bc;
+    border-top: 4px solid #000;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    padding: 8px;
+    text-align: center;
 }
 
 #content td {
-	background: #d6fbd9;
-	border-bottom: 1px solid #fff;
-	color: #669;
-	border-top: 1px solid transparent;
-	padding: 8px;
+    background: #d6fbd9;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid transparent;
+    padding: 8px;
+    text-align: left;
 }
 
 #content tr:hover td {

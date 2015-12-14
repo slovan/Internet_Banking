@@ -125,7 +125,6 @@ a:hover {
 	background: white;
 	width: 100%;
 	border-collapse: collapse;
-	text-align: center;
 }
 
 #content th {
@@ -136,6 +135,7 @@ a:hover {
 	border-bottom: 1px solid #fff;
 	color: #fff;
 	padding: 8px;
+	text-align: center;
 }
 
 #content td {
@@ -144,6 +144,7 @@ a:hover {
 	color: #669;
 	border-top: 1px solid transparent;
 	padding: 8px;
+	text-align: left;
 }
 
 #content tr:hover td {
@@ -202,6 +203,12 @@ a:hover {
 #sidebar p {
 	padding: 0 10px 10px 10px;
 	color: #232323;
+}
+
+#sidebar .checkbox {
+    margin: 0 0 10px 10px;
+    color: #400000;
+    font-size: 14px;
 }
 
 #sidebar ul {

@@ -28,6 +28,13 @@ public class AccountService {
     public AccountService() {
         // TODO Auto-generated constructor stub
     }
+    
+    // get all accounts from database
+    public List<Account> getAllAccounts() {
+        TypedQuery<Account> accountsQuery = this.em.createQuery("SELECT account FROM Account account", Account.class);
+        List<Account> accountsList = accountsQuery.getResultList();
+        return accountsList;
+    }
 
     public boolean addAccountToClient(Account account, int clientId) {
         // create a query to find a client by his id

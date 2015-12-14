@@ -99,7 +99,6 @@ public class AddClient extends HttpServlet {
         // get client's data from jsp
         // first name
         String firstName = request.getParameter("first_name");
-        System.out.println(firstName);
 
         // last name
         String lastName = request.getParameter("last_name");
@@ -233,6 +232,7 @@ public class AddClient extends HttpServlet {
             // redirect to home page
             if (request.getParameter("find_stream").equals("confirm_only")) {
                 HttpSession session = request.getSession();
+                session.setAttribute("client", null);
                 session.setAttribute("status", "New client was added successfully!");
                 response.sendRedirect("../admin");
             }

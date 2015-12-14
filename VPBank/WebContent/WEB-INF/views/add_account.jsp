@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"
-	import="java.util.List, com.vpbank.models.Client, 
+	import="java.util.List, java.util.Calendar, com.vpbank.models.Client, 
 	com.vpbank.services.AccountGenerator, java.util.Date, 
 	java.text.SimpleDateFormat, com.vpbank.models.AccountType,
 	com.vpbank.models.Currency"%>
@@ -38,8 +38,8 @@ if (client == null) { // in that case client is not selected yet
         <div class="menu">
             <ul>
                 <li><a href="../admin">Home</a></li>
-                <li><a href="#">Clients</a></li>
-                <li><a href="#">Accounts</a></li>
+                <li><a href="table_clients">Clients</a></li>
+                <li><a href="table_accounts">Accounts</a></li>
             </ul>
         </div>
         <div id="contentwrap">
@@ -203,15 +203,20 @@ if (client == null) { // in that case client is not selected yet
                        <label for="date_open">Opened from:</label>
                        <%
                            Date now = new Date(); // current date 
-                           SimpleDateFormat dateFormated = new SimpleDateFormat("yyyy-MM-dd");
+                           Calendar cal = Calendar.getInstance();
+                           cal.setTime(now);
+                           cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)+1);
+                           Date tomorrow = cal.getTime(); // tomorrow date
+                           
+                           
                        %>
-                       <input name="date_open" type="date" value="<%= dateFormated.format(now) %>" required></input> 
-                       <small> *date in format dd.mm.yyyy</small>
+                       <input name="date_open" type="date" required></input> 
+                       <small> *date in format dd.mm.yyyy (max value is <%=datePrint.format(now) %>)</small>
                    </div>
                    <div class="input_field">
                        <label for="date_close">Valid until:</label>
-                       <input name="date_close" type="date" value="<%= dateFormated.format(now) %>" min="<%= dateFormated.format(now) %>" required></input> 
-                       <small> *date in format dd.mm.yyyy</small>
+                       <input name="date_close" type="date" required></input> 
+                       <small> *date in format dd.mm.yyyy (min value is <%=datePrint.format(tomorrow) %>)</small>
                        <%
                            if ((Boolean)request.getAttribute("incorrect_date")) {
                        %>
