@@ -13,7 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.vpbank.models.ClientAccessDetails;
 
 /**
- * Servlet implementation class ManePage
+ * Servlet implementation class ManePage. 
+ * Main page of clients' profiles
  */
 @WebServlet("/index")
 public class MainPage extends HttpServlet {
@@ -39,7 +40,7 @@ public class MainPage extends HttpServlet {
             response.sendRedirect("login");
         } else {
             request.setAttribute("login_info", cad);
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index_page.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/IndexClient.jsp");
             view.forward(request, response);
         }
     }

@@ -91,8 +91,8 @@ if (listAccounts.isEmpty()) { // in that case no accounts in database
             </div> 
 
             <div id="sidebar">
-                <form method="POST" action="table_clients">
-                    <h3>Sort clients by:</h3>
+                <form method="POST" action="table_accounts">
+                    <h3>Sort accounts by:</h3>
                     <br />
                     <label class="checkbox"><input type="checkbox" name="owner_name"> owner's name</label>
                     <br />
@@ -103,8 +103,7 @@ if (listAccounts.isEmpty()) { // in that case no accounts in database
                     <label class="checkbox"><input type="checkbox" name="balance"> balance</label>
                     <br /><br />
                     <div style="text-align: center;">
-                        <button name="button_pressed" type="submit" 
-                        value="another_client">Select</button>
+                        <button type="submit">Select</button>
                     </div>
                 </form>
                 <%
@@ -115,7 +114,7 @@ if (listAccounts.isEmpty()) { // in that case no accounts in database
         </div>
         <div id="footer">
             <p>
-                &copy; Copyright 2016 <a href="#">VPBank</a> | Configured by <a
+                &copy; Copyright 2016 <a href="../admin">VPBank</a> | Configured by <a
                     href="https://github.com/slovan">Volodymyr Ponomarenko</a>
             </p>
         </div>

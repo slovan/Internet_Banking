@@ -20,7 +20,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
- * Entity implementation class for Entity: Account
+ * Entity implementation class for Entity: Account. 
+ * Represents persistent data of accounts maintained in database
  *
  */
 @NamedQuery(name = "findAccountsByBasicNumber", query = "SELECT acc FROM Account acc WHERE acc.accountNumberBasic = :accountNumberBasic")
@@ -89,7 +90,7 @@ public class Account implements Serializable {
         public int compare(Account acc1, Account acc2) {
             Double balance1 = acc1.getAmount();
             Double balance2 = acc2.getAmount();
-            return balance1.compareTo(balance2);
+            return balance2.compareTo(balance1);
         }
     };
     

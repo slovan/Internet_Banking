@@ -139,7 +139,7 @@
         </div>
         <div id="footer">
             <p>
-                &copy; Copyright 2016 <a href="#">VPBank</a> | Configured by <a
+                &copy; Copyright 2016 <a href="../admin">VPBank</a> | Configured by <a
                     href="https://github.com/slovan">Volodymyr Ponomarenko</a>
             </p>
         </div>

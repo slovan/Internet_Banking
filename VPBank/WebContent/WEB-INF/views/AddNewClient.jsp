@@ -24,8 +24,8 @@
 		<div class="menu">
 			<ul>
 				<li><a href="../admin">Home</a></li>
-				<li><a href="#">Clients</a></li>
-				<li><a href="#">Accounts</a></li>
+				<li><a href="table_clients">Clients</a></li>
+				<li><a href="table_accounts">Accounts</a></li>
 			</ul>
 		</div>
 		<div id="contentwrap">
@@ -137,7 +137,7 @@
 		</div>
 		<div id="footer">
 			<p>
-				&copy; Copyright 2016 <a href="#">VPBank</a> | Configured by <a
+				&copy; Copyright 2016 <a href="../admin">VPBank</a> | Configured by <a
 					href="https://github.com/slovan">Volodymyr Ponomarenko</a>
 			</p>
 		</div>

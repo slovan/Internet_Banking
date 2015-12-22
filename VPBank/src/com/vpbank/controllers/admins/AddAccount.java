@@ -28,7 +28,8 @@ import com.vpbank.services.AccountService;
 import com.vpbank.services.ClientService;
 
 /**
- * Servlet implementation class AddAccountToClient
+ * Servlet implementation class AddAccountToClient. 
+ * Aimed to add new account to database by administrator of VPBank
  */
 @WebServlet("/admin/add_account")
 public class AddAccount extends HttpServlet {
@@ -54,7 +55,7 @@ public class AddAccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/add_account.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/AddNewAccount.jsp");
         // set default attributes for the request
         request.setAttribute("firstName", "");
         request.setAttribute("lastName", "");
@@ -76,7 +77,7 @@ public class AddAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        RequestDispatcher page = request.getRequestDispatcher("../WEB-INF/views/add_account.jsp");
+        RequestDispatcher page = request.getRequestDispatcher("../WEB-INF/views/AddNewAccount.jsp");
         HttpSession session = request.getSession(); // get access to session
         
         // if form was sent after pressing button with value "search"

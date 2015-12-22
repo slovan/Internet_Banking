@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminMain
+ * Servlet implementation class AdminMain. 
+ * Navigator of administration console
  */
 @WebServlet("/admin")
 public class AdminMain extends HttpServlet {
@@ -28,7 +29,7 @@ public class AdminMain extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index_admin.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/IndexAdmin.jsp");
         view.forward(request, response);
     }
 

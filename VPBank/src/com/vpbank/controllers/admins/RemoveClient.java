@@ -17,6 +17,7 @@ import com.vpbank.services.ClientService;
 
 /**
  * Servlet implementation class RemoveClient
+ * Aimed to remove a client from database by administrator of VPBank
  */
 @WebServlet("/admin/remove_client")
 public class RemoveClient extends HttpServlet {

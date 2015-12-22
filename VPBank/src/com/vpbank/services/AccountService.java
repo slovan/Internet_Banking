@@ -13,7 +13,11 @@ import com.vpbank.models.Account;
 import com.vpbank.models.Client;
 
 /**
- * Session Bean implementation class AccountService
+ * Session Bean implementation class AccountService. For persisting Account
+ * Entity Bean
+ * 
+ * @author Volodymyr Ponomarenko
+ * @version 1.0
  */
 @Stateless
 @LocalBean
@@ -28,14 +32,28 @@ public class AccountService {
     public AccountService() {
         // TODO Auto-generated constructor stub
     }
-    
-    // get all accounts from database
+
+    /**
+     * Get all accounts from database
+     * 
+     * @return list of all accounts in database; if no one account in database -
+     *         return empty list
+     */
     public List<Account> getAllAccounts() {
         TypedQuery<Account> accountsQuery = this.em.createQuery("SELECT account FROM Account account", Account.class);
         List<Account> accountsList = accountsQuery.getResultList();
         return accountsList;
     }
 
+    /**
+     * Add account to client's list of accounts and persist both
+     * 
+     * @param account
+     *            account which will be persisted
+     * @param clientId
+     *            id of future owner of account
+     * @return true - if persisted successfully; false - if unsuccessfully
+     */
     public boolean addAccountToClient(Account account, int clientId) {
         // create a query to find a client by his id
         TypedQuery<Client> clientQuery = this.em.createNamedQuery("Client.findById", Client.class);
@@ -52,9 +70,19 @@ public class AccountService {
             return true;
         } catch (NoResultException exc) { // if there is no client with such id
             return false;
-        } 
+        }
     }
 
+    /**
+     * Find and return accounts with the similar basic numbers to given by the
+     * parameter
+     * 
+     * @param accountNumberBasic
+     *            account number (basic) to be compared with account numbers in
+     *            database
+     * @return list of accounts with the similar basic numbers; if no one
+     *         account such accounts in database - return empty list
+     */
     public List<Account> getAccountsWithSimilarBasicNumber(long accountNumberBasic) {
         TypedQuery<Account> accountQuery = this.em.createNamedQuery("findAccountsByBasicNumber", Account.class);
         accountQuery.setParameter("accountNumberBasic", accountNumberBasic);

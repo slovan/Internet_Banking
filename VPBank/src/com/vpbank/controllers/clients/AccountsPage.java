@@ -13,7 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.vpbank.models.ClientAccessDetails;
 
 /**
- * Servlet implementation class AccountPage
+ * Servlet implementation class AccountPage. 
+ * Aimed to show list of all accounts of current client
  */
 @WebServlet("/accounts")
 public class AccountsPage extends HttpServlet {
@@ -39,7 +40,7 @@ public class AccountsPage extends HttpServlet {
             response.sendRedirect("login");
         } else {
             request.setAttribute("login_info", cad);
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/accounts_page.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/AccountsOfClient.jsp");
             view.forward(request, response);
         }
     }

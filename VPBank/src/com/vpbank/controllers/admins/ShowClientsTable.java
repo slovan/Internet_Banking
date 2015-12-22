@@ -15,7 +15,9 @@ import com.vpbank.models.Client;
 import com.vpbank.services.ClientService;
 
 /**
- * Servlet implementation class ShowClientsTable
+ * Servlet implementation class ShowClientsTable. 
+ * Aimed to show list of all accounts in database to administrator of VPBank. 
+ * Function of sorting of the list is realized
  */
 @WebServlet("/admin/table_clients")
 public class ShowClientsTable extends HttpServlet {

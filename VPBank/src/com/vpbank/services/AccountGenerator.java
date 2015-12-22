@@ -8,12 +8,23 @@ import java.util.Date;
 import com.vpbank.models.Client;
 
 /**
+ * Class for generation account numbers
  * @author Volodymyr Ponomarenko
- *
+ * @version 1.0
  */
-// special class for automatic generation of account numbers
 public class AccountGenerator {
-    // generate individual account number (basic)
+
+    /**
+     * Generate bank account number (basic)
+     * 
+     * According to the National Bank of Slovakia, to validate the basic
+     * part of the account number, the digits are multiplied by their 
+     * respective weights (6,3,7,9,10,5,8,4,2,1), added up and divided by 11.
+     * The remainder must be zero.
+     * 
+     * @param c instance of client - owner of the account will be created
+     * @return account number (basic)
+     */
     public static long genAccountNumberBasic(Client c) {
         int firstNameLength = c.getFirstName().length(); // take first name
                                                          // length
@@ -24,13 +35,6 @@ public class AccountGenerator {
 
         long accountNumberBasic = ((todayNum - birthdayNum) / id) % 10000000000L; // initialization
         accountNumberBasic = (accountNumberBasic * firstNameLength * lastNameLength) % 10000000000L;
-
-        // According to the National Bank of Slovakia, to validate the basic
-        // part
-        // of the account number, the digits are multiplied by
-        // their respective weights (6,3,7,9,10,5,8,4,2,1), added up and divided
-        // by 11.
-        // The remainder must be zero.
 
         byte[] accountNumArray = new byte[10]; // because 10 digits of account
 
@@ -109,13 +113,20 @@ public class AccountGenerator {
         }
     }
 
-    // generate individual account number (prefix)
+
+    /**
+     * Generate bank account number (prefix)
+     * 
+     * According to the National Bank of Slovakia, to validate the prefix part
+     * of the account number, the digits are multiplied by their respective 
+     * weights (10,5,8,4,2,1), added up and divided by 11.
+     * The remainder must be zero.
+     * 
+     * @param start set initialization value for account number generator
+     * @return account number (prefix)
+     */
     public static int genAccountNumberPrefix(int start) {
-        // According to the National Bank of Slovakia, to validate the prefix
-        // part
-        // of the account number, the digits are multiplied by
-        // their respective weights (10,5,8,4,2,1), added up and divided by 11.
-        // The remainder must be zero.
+
         int accountNumberPrefix = start + 1;
 
         byte[] accountNumArray = new byte[6]; // because 6 digits of account
@@ -203,7 +214,16 @@ public class AccountGenerator {
         }
     }
 
-    // generate IBAN form of the account number
+
+    /**
+     * Generate IBAN form of the account number
+     * 
+     * @param accountNumberBasic bank account number (basic)
+     * @param accountNumberPrefix bank account number (prefix)
+     * @param bankCode bank national code
+     * @param countryCode code of the country (e.g. SK for Slovakia)
+     * @return account number in IBAN format
+     */
     public static String genAccountNumberIBAN(long accountNumberBasic, int accountNumberPrefix, short bankCode,
             String countryCode) {
         // convert country code to a number form and write it accountNumberIBAN

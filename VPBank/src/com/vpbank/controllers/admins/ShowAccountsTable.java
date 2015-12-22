@@ -15,7 +15,9 @@ import com.vpbank.models.Account;
 import com.vpbank.services.AccountService;
 
 /**
- * Servlet implementation class ShowAccountsTable
+ * Servlet implementation class ShowAccountsTable. 
+ * Aimed to show list of all accounts in database to administrator of VPBank. 
+ * Function of sorting of the list is realized
  */
 @WebServlet("/admin/table_accounts")
 public class ShowAccountsTable extends HttpServlet {
@@ -122,7 +124,7 @@ public class ShowAccountsTable extends HttpServlet {
             listAccounts.sort(Account.getByBalance());
         } 
 
-        request.setAttribute("listOfClients", listAccounts);
+        request.setAttribute("listOfAccounts", listAccounts);
         view.forward(request, response);
     }
 

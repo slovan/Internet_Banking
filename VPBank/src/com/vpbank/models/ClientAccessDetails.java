@@ -11,7 +11,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
- * Entity implementation class for Entity: ClientAccessDetails
+ * Entity implementation class for Entity: ClientAccessDetails.
+ * Represents persistent data of log in clients' information maintained in database
  *
  */
 @Entity

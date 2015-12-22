@@ -16,7 +16,8 @@ import com.vpbank.models.ClientAccessDetails;
 import com.vpbank.services.ClientService;
 
 /**
- * Servlet implementation class LogInClient
+ * Servlet implementation class LogInClient. 
+ * Aimed to provide log in function
  */
 @WebServlet(description = "Servlet for ensuring clients' login to InternetBanking", urlPatterns = { "/login" })
 public class LogInClient extends HttpServlet {
@@ -39,7 +40,7 @@ public class LogInClient extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/LogInPage.jsp");
         request.setAttribute("username_error", false);
         request.setAttribute("password_error", false);
         request.setAttribute("user-ID", "");
@@ -81,7 +82,7 @@ public class LogInClient extends HttpServlet {
             session.setAttribute("checking", cad);
             response.sendRedirect("index");
         } else {
-            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login_client.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/LogInPage.jsp");
             view.forward(request, response);
         }
     }

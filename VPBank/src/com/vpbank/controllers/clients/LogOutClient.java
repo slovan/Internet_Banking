@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogOutClient
+ * Servlet implementation class LogOutClient.
+ * Aimed to provide log out function
  */
 @WebServlet("/logout")
 public class LogOutClient extends HttpServlet {
@@ -33,7 +34,7 @@ public class LogOutClient extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/logout_client.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/LogOutPage.jsp");
         view.forward(request, response);
     }
 

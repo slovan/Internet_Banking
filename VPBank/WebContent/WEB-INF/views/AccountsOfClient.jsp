@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.vpbank.models.*, java.util.List, java.text.SimpleDateFormat, java.text.DecimalFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="com.vpbank.models.*, java.util.List, java.text.SimpleDateFormat, java.text.DecimalFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,7 @@
 		<div class="menu">
 			<ul>
 				<li><a href="index">Home</a></li>
-				<li><a href="#">Accounts</a></li>
+				<li><a href="accounts">Accounts</a></li>
 				<li><a href="#">Payments</a></li>
 
 			</ul>
@@ -236,7 +236,7 @@
 
 		<div id="footer">
 			<p>
-				&copy; Copyright 2016 <a href="#">VPBank</a> | Configured by <a
+				&copy; Copyright 2016 <a href="index">VPBank</a> | Configured by <a
 					href="https://github.com/slovan">Volodymyr Ponomarenko</a>
 			</p>
 		</div>

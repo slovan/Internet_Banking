@@ -23,8 +23,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
- * Entity implementation class for Entity: Client
- *
+ * Entity implementation class for Entity: Client. 
+ * Represents persistent data of personal clients' information maintained in database
+ * 
  */
 
 @Entity

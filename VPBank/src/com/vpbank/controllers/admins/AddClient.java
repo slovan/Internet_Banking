@@ -22,7 +22,8 @@ import com.vpbank.models.MaritalStatus;
 import com.vpbank.services.ClientService;
 
 /**
- * Servlet implementation class AddClient
+ * Servlet implementation class AddClient. 
+ * Aimed to add new client to database by administrator of VPBank
  */
 @WebServlet("/admin/new_client")
 public class AddClient extends HttpServlet {
@@ -60,7 +61,7 @@ public class AddClient extends HttpServlet {
         request.setAttribute("under_age", false);
         request.setAttribute("incorrect_date", false);
 
-        RequestDispatcher visual = request.getRequestDispatcher("../WEB-INF/views/new_client.jsp");
+        RequestDispatcher visual = request.getRequestDispatcher("../WEB-INF/views/AddNewClient.jsp");
         visual.forward(request, response);
 
     }
@@ -199,7 +200,7 @@ public class AddClient extends HttpServlet {
 
         // if there were some errors
         if ((Boolean)request.getAttribute("error")) {
-            RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/new_client.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/AddNewClient.jsp");
             // set attributes for the request, not to be needed enter them again
             request.setAttribute("loginUsername", loginUsername);
             request.setAttribute("loginPassword", loginPassword);
