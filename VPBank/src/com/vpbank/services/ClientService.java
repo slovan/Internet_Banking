@@ -132,7 +132,29 @@ public class ClientService {
         List<ClientAccessDetails> results = query.getResultList();
         return results;
     }
-
+    
+    /**
+     * Get client by his access details (log in information) from database
+     * 
+     * @param loginUsername login username, should be used for searching
+     * @param loginPassword login password, should be used to control entered data
+     * @return client instance - if login data is correct; null - if not
+     */
+    public Client getClientByAccessDetails(String loginUsername, String loginPassword) {
+        TypedQuery<ClientAccessDetails> cadQuery = this.em.createNamedQuery("ClientAccessDetails.findByLoginUsername",
+                ClientAccessDetails.class);
+        cadQuery.setParameter("loginUsername", loginUsername);
+        try {
+            ClientAccessDetails cad = cadQuery.getSingleResult(); // get cad from DB if exists
+            if (cad.getLoginPassword().equals(loginPassword)) {
+                return cad.getClient();
+            } else {
+                return null;
+            }
+        } catch (NoResultException exc) {
+            return null;
+        }
+    }
     
     /**
      * Check if such loginUsername is already exists in database

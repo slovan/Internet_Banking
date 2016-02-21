@@ -87,7 +87,6 @@ public class AccountService {
         TypedQuery<Account> accountQuery = this.em.createNamedQuery("findAccountsByBasicNumber", Account.class);
         accountQuery.setParameter("accountNumberBasic", accountNumberBasic);
         List<Account> listAccounts = accountQuery.getResultList();
-        System.out.println(listAccounts);
         return listAccounts;
     }
 }

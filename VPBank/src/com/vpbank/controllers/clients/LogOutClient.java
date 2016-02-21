@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.vpbank.models.Client;
+
 /**
  * Servlet implementation class LogOutClient.
  * Aimed to provide log out function
@@ -33,9 +35,14 @@ public class LogOutClient extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.invalidate();
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/LogOutPage.jsp");
-        view.forward(request, response);
+        Client clientData = (Client)session.getAttribute("checking");
+        if (clientData == null) {
+            response.sendRedirect("login");
+        } else {
+            session.invalidate();
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/LogOutPage.jsp");
+            view.forward(request, response);
+        }
     }
 
     /**

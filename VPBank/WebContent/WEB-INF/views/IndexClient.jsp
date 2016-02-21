@@ -32,11 +32,11 @@
 			</ul>
 		</div>
 		<%
-			ClientAccessDetails cad = (ClientAccessDetails) request.getAttribute("login_info");
-			String firstName = (String) cad.getClient().getFirstName();
-			String lastName = (String) cad.getClient().getLastName();
+			Client clientData = (Client) request.getAttribute("client_data");
+			String firstName = (String) clientData.getFirstName();
+			String lastName = (String) clientData.getLastName();
 			String prefix; // variable with correct prefix to name of male/female
-			if (cad.getClient().getGender() == Gender.MALE) { // detect gender of client
+			if (clientData.getGender() == Gender.MALE) { // detect gender of client
 				prefix = "Mr."; // if male
 			} else {
 				prefix = "Ms."; // if female

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.vpbank.models.ClientAccessDetails;
+import com.vpbank.models.Client;
 
 /**
  * Servlet implementation class AccountPage. 
@@ -35,11 +35,11 @@ public class AccountsPage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ClientAccessDetails cad = (ClientAccessDetails)session.getAttribute("checking");
-        if (cad == null) {
+        Client clientData = (Client)session.getAttribute("checking");
+        if (clientData == null) {
             response.sendRedirect("login");
         } else {
-            request.setAttribute("login_info", cad);
+            request.setAttribute("client_data", clientData);
             RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/AccountsOfClient.jsp");
             view.forward(request, response);
         }
