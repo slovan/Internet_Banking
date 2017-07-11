@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,7 +66,7 @@ public class Client implements Serializable {
     @OneToOne(mappedBy = "client", cascade = CascadeType.REMOVE)
     private ClientAccessDetails clientAccessDetails;
 
-    @OneToMany(mappedBy = "ownerOfAccount", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "ownerOfAccount", cascade = CascadeType.REMOVE)
     private List<Account> accounts;
 
     private static Comparator<Client> byFirstName = new Comparator<Client>() {

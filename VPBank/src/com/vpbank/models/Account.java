@@ -24,9 +24,8 @@ import javax.persistence.Transient;
  * Represents persistent data of accounts maintained in database
  *
  */
-@NamedQuery(name = "findAccountsByBasicNumber", query = "SELECT acc FROM Account acc WHERE acc.accountNumberBasic = :accountNumberBasic")
 @Entity
-
+@NamedQuery(name = "findAccountsByBasicNumber", query = "SELECT acc FROM Account acc WHERE acc.accountNumberBasic = :accountNumberBasic")
 public class Account implements Serializable {
 
     @Transient
